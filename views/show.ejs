@@ -1,0 +1,60 @@
+<%- include ('partials/header.ejs'); -%>
+
+<div class="demo-wrap">
+    <div class="demo-content">
+<div class="container" >
+    <div class="row">
+        <div class="col-md-3" style="height:100%;">
+        </div>
+    
+        <div class="col-md-6" style="height:100%;">
+    <h4><%= image.name%></h4>
+    <div  class="card shadow border-0" style=" margin:1%;">
+        <img  src="data:image/<%=image.img.contentType%>;base64,
+        <%=image.img.data.toString('base64')%>"  >
+
+        <h4 class="card-title text-capitalize" style ="margin-left: 12px;">
+            <%= image.name %>
+        </h4>
+    
+    <p  style ="margin-left: 12px;" class="card-text">
+        <%= image.desc %>
+        <br>
+        <br>
+        <div class="text-right"><em  style ="margin-right: 10px;"> Submitted By <%= image.author.username %> </em></div>
+        
+    </p>
+    <% if(currentUser && image.author.id.equals(currentUser._id)) {%>
+    <span style="display: inline;"><a class="btn btn-warning  btn-sm" href="/campgrounds/<%=image._id%>/edit" >Edit</a>
+    <form style="display: inline;" action="/campgrounds/<%=image._id%>?_method=DELETE" method="POST" style="display: inline;">
+    <button class="btn btn-danger  btn-sm">Delete</button>
+    </form>
+    </span>
+    <%} %>
+           </div>
+       
+        </div>
+    </div>
+   
+
+    <div class="card" >
+        <div class ="text-right">
+            <a class ="btn btn-success" href="/campgrounds/<%=image._id%>/comments/new">Add Comment</a>
+        </div>
+        <% image.comments.forEach(function(comment){ %>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                  <p><%= comment.text %></p>
+                  <footer class="blockquote-footer">Submitted By <cite title="Author"><%= comment.author.username %></cite></footer>
+                </blockquote>
+              </div>
+    
+        <%})%>
+      </div>
+
+     
+     
+</div>
+</div>
+</div>
+<%- include ('partials/footer.ejs'); -%>

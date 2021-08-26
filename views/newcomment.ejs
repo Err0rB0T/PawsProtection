@@ -1,0 +1,17 @@
+<%- include ('partials/header.ejs'); -%>
+
+
+<div class="container">
+  <div class="mb-3">
+  <form action="/campgrounds/<%=image._id%>/comments" method="POST">
+  <label for="Comment" class="form-label"><h3>Enter Comment for <%=image.name%></h3></label>
+  <textarea class="form-control" name ="comment" placeholder="Enter Comment" rows="3"></textarea>
+
+  
+  <button class="btn btn-success">Comment</button>
+  </div>
+</div>
+</form>
+
+
+  <%- include ('partials/footer.ejs'); -%>

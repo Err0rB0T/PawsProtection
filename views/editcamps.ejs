@@ -1,0 +1,46 @@
+<%- include ('partials/header.ejs'); -%>
+
+
+
+<div class="container mt-5">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-sm-7 col-md-6 col-lg-5">
+        <div class="card shadow border-0">
+          <div class="card-body">
+            <h1 class="text-center">Edit <%=image.name%></h1>
+    
+        <form action="/campgrounds/<%=image._id%>?_method=PUT" method="POST" enctype="multipart/form-data" >
+            <div class="form-group">
+                <label for="name">Image Title</label>
+                <input type="text" class="form-control" name="name" placeholder="Name"
+                       value="<%=image.name%>" required  >
+            </div>
+            <div class="form-group">
+                <label for="image">Upload Image</label>
+                <input class="form-control" type="file" id="image"
+                       name="image" value="<%=image.img%>"  >
+            </div>
+            <div class="form-group">
+                <label for="desc">Image Description</label>
+                <textarea class="form-control"  name="desc"  rows="5"
+                          placeholder="Description" required ><%=image.desc %>
+                </textarea>
+            </div>
+            
+            <div>
+                <button type="submit" class="btn btn-info btn-block">Submit</button>
+            </div>
+            <div>
+                <a href="/campgrounds/<%=image._id%>">Go Back</a>
+            </div>
+        </form>
+    </div>
+          </div>
+        </div>
+        <div class="col"> </div>
+      </div>
+</div>
+    
+
+<%- include ('partials/footer.ejs'); -%>
