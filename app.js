@@ -370,6 +370,6 @@ app.get("/register", function(req, res) {
 
 //==========================================================================================================
 app.use("/bower_components", express.static('./bower_components/'));
-server.listen(3000,function(){
+server.listen(process.env.PORT || 3000,function(){
     console.log("Running on server 3000");
 });
