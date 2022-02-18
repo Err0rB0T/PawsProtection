@@ -1,0 +1,151 @@
+
+<%- include ('partials/header.ejs'); -%>
+
+
+    <!-- Preloader -->
+   
+    <div >
+        <!-- Navigation -->
+        
+        <div class="navbar-default sidebar nicescroll" role="navigation">
+            <div class="sidebar-nav navbar-collapse ">
+                <ul class="nav" id="side-menu">
+                    
+                    <li>
+                        <a href="dashboard" class="waves-effect">Dashboard</a>
+                    </li>
+                    <% if (currentUser) { %>
+                        <li>
+                            <a href="user" class="waves-effect">User Profile</a>
+                        </li>
+                        <% }  %>
+                     <br>
+                     <li>
+                        <a href="records" class="waves-effect">Records</a>
+                    </li>
+                    <li>
+                        <a href="aboutus" class="waves-effect">About</a>
+                    </li>
+                    
+                        
+                   
+                
+                </ul>
+                <div class="center p-20">
+                    <span class="hide-menu"><a href="/campgrounds/new" target="_blank"
+                            class="btn btn-info btn-block btn-rounded waves-effect waves-light">Register Complaint</a></span>
+                </div>
+            </div>
+        
+    </div>
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-12">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Dashboard</a></li>
+                    </ol>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <% var count=0%>
+            <% camps.forEach(function(image,i){ %>
+                <% if((image.status===false)){ %>  
+                   <% count++; %>
+                   <% }%>
+                   <% })%>
+
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <div class="white-box">
+                        <div class="row row-in">
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="col-in text-center">
+                                    <h5 class="text-danger">Total registered cases</h5>
+                                    <h3 class="counter"><%= camps.length %></h3>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="col-in text-center b-r-none">
+                                    <h5 class="text-muted text-warning">Solved</h5>
+                                    <h3 class="counter"><%=camps.length -count %></camps.length></h3>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="col-in text-center b-0">
+                                    <h5 class="text-info">Pending</h5>
+                                    <h3 class="counter"><%= count %></h3>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- row -->
+            
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-sm-6">
+                    <h2>Latest 5 Complaints</h2>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Title of the Complaint</th>
+
+                                    <th>Registered On</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>      
+                            
+                            
+
+                                <% camps.forEach(function(image,i){ %>
+                                    <% if(i < (5)){ %>    
+                                        <tbody>
+                                            <tr>
+                                                <td><%=i+1%></td>
+                                                <td><%=image.title%></td>
+                                                <td><p>
+                                                    <a class="btn btn-primary"  href="/campgrounds/<%=image._id%>" role="button" >
+                                                      More Detail
+                                                    </a>
+                                                  </p>
+                                                </td>
+                                                <td><%= moment(image.createdAt).format('LL') %></td>
+                                                <% if(image.status===false){ %>  
+                                                <td>Pending</td>
+                                                <% }else{ %>  
+                                                    <td>Solved</td>
+                                                    <%}%>
+                                            </tr>
+                                        </tbody>
+                                    <% }%>
+                            <% })%>
+                           
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-6 col-sm-6">
+                    <h2> Analytics </h2>
+                    
+                    <img src="https://i.pinimg.com/564x/31/0f/d0/310fd0861b095ec766dbfb362851df12.jpg" style="width: 90%; height: 90%;"/>
+                    
+                </div>
+            </div>
+            <!-- </div> -->
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+    <footer class="footer text-center"><b>We are their voices!</b></footer>
+   
+    <%- include ('partials/footer.ejs'); -%>
+  

@@ -1,0 +1,118 @@
+
+
+<%- include ('partials/header2.ejs'); -%>
+ <!-- Page Content -->
+ 
+            <!-- /.col-lg-12 -->
+            <div class="container"> 
+        <!-- row -->
+        <div class="row">
+            
+            <div class="col-md-12 col-xs-12">
+                <div class="white-box">
+                    <form class="form-horizontal form-material">
+                        <div class="form-group">
+                            <label class="col-md-12">Full Name</label>
+                            <div class="col-md-12">
+                                <input type="text" placeholder="<%=currentUser.fullName%>" value="<%=currentUser.fullName%>"
+                                    class="form-control form-control-line"> </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="example-email" class="col-md-12">Email</label>
+                            <div class="col-md-12">
+                                <input type="email" placeholder="<%=currentUser.email%>" value="<%=currentUser.email%>"
+                                    class="form-control form-control-line" name="example-email" id="example-email">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-md-12">Phone No</label>
+                            <div class="col-md-12">
+                                <input type="text" placeholder="<%=currentUser.phone%>" value = "<%=currentUser.phone%>"
+                                    class="form-control form-control-line"> </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="example-address" class="col-md-12">Address</label>
+                            <div class="col-md-12">
+                                <input type="address" placeholder="Gomti Nagar, Lucknow"
+                                    class="form-control form-control-line" name="example-address" id="example-address">
+                            </div>
+                        </div>
+                        
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+         
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="#">My Complaints</a></li>
+                </ol>
+            </div>
+        </div>
+        <!-- row -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="white-box">
+                    <h3>Records till date</h3>
+                    <!-- <p class="text-muted">Add class <code>.table</code></p> -->
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Title of the Complaint</th>
+
+                                    <th>Registered On</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <% camps.forEach(function(image,i){ %>
+                                <% if(currentUser && image.author.id.equals(currentUser._id)) {%>
+                            <tbody>
+                                <tr>
+                                    <td><%= i+1 %></td>
+                                    <td><%=image.title%></td>
+                                    <td><p>
+                                        <a class="btn btn-primary" href="/campgrounds/<%=image._id%>" role="button" >
+                                          More Detail
+                                        </a>
+                                        
+                                      </p>
+                                
+                                    </td>
+                                    <td><%= moment(image.createdAt).format('LL') %></td>
+                                    <% if(image.status===false){ %>  
+                                        <td>Pending</td>
+                                        <% }else{ %>  
+                                            <td>Solved</td>
+                                            <%}%>
+                                </tr>
+                                
+
+                            </tbody>
+                            <% } %>
+                            <% }) %>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+</div>
+
+<!-- /#page-wrapper -->
+<footer class="footer text-center"><b>We are their voices!</b></footer>
+
+
+
+
+<%- include ('partials/footer.ejs'); -%>

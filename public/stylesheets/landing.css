@@ -39,22 +39,22 @@ body {
     animation: imageAnimation 50s linear infinite; 
   }
   .slideshow li:nth-child(1) { 
-    background-image: url(https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Zm9vZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60) 
-  }
+    background-image: url(https://images.unsplash.com/photo-1522276498395-f4f68f7f8454?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8YW5pbWFsJTIwcHJvdGVjdGlvbnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
+    animation-delay: 0s; }
   .slideshow li:nth-child(2) { 
-    background-image: url(https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGZvb2R8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
+    background-image: url(https://images.unsplash.com/photo-1560743641-3914f2c45636?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGFuaW1hbCUyMHByb3RlY3Rpb258ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
     animation-delay: 10s; 
   }
   .slideshow li:nth-child(3) { 
-    background-image: url(https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fGZvb2R8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
+    background-image: url(https://media.istockphoto.com/photos/concept-save-the-world-save-environment-the-world-is-in-the-grass-of-picture-id1202293671?b=1&k=20&m=1202293671&s=170667a&w=0&h=WSY6ddufUTYBynejyJcC5P86xIREr1mJyHVMGJZoXHE=);
     animation-delay: 20s; 
   }
   .slideshow li:nth-child(4) { 
-    background-image: url(https://images.unsplash.com/photo-1488900128323-21503983a07e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDV8fGZvb2R8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
+    background-image: url(https://images.unsplash.com/photo-1516233758813-a38d024919c5?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGFuaW1hbCUyMHByb3RlY3Rpb258ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
     animation-delay: 30s; 
   }
   .slideshow li:nth-child(5) { 
-    background-image: url(https://images.unsplash.com/photo-1496412705862-e0088f16f791?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTB8fGZvb2R8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
+    background-image: url(https://media.istockphoto.com/photos/elephant-and-dog-sit-under-the-rain-picture-id160887834?b=1&k=20&m=160887834&s=170667a&w=0&h=iuF9rb9VvKDLMbHUr5dkSEB7Ut-TbswKmQWMukPO0JM=);
     animation-delay: 40s; 
   }
 

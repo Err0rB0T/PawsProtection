@@ -2,6 +2,7 @@
 
 var express = require('express');
 var app = express();
+var http = require('http');
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var Campground = require("./models/Campgrounds");
@@ -11,6 +12,7 @@ var LocalStrategy = require('passport-local');
 var passportLocalMongoosse = require('passport-local-mongoose');
 var Comment = require("./models/comments");
 var User = require("./models/user");
+var moment = require('moment');
 var session = require('express-session');
 flash = require("connect-flash");
 
@@ -63,7 +65,10 @@ var update = multer({ storage: storage });
 
 
 app.use(bodyParser.urlencoded({extended:true}));
-mongoose.connect("mongodb://localhost/yelp_camp",{ useNewUrlParser: true }, { useUnifiedTopology: true });
+
+mongoose.connect("mongodb+srv://ErrorB0T:intex2.1@cluster0.vorks.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",{ useNewUrlParser: true }, { useUnifiedTopology: true }, ()=>{
+  console.log("connected");
+});
 
 
 
@@ -72,32 +77,79 @@ app.get("/",function(req,res){
     res.render("landing.ejs");
 });
 
+
+app.get("/records",function(req,res){
+    Campground.find({},function(err,camps){
+         if(err)
+        console.log(err);
+         else
+         res.render("records.ejs",{camps:camps,currentUser:req.user,moment:moment});
+     });
+});
+
+app.get("/dashboard",async function(req,res){
+  Campground.find({}, function(err,camps){
+    if(err)
+   console.log(err);
+    else
+    res.render("dashboard.ejs",{camps:camps,currentUser:req.user,moment:moment});
+    });
+});
+
+app.get("/about",function(req,res){
+  res.render("about");
+});
+
 //======================================================================================================
 
 app.get("/campgrounds",function(req,res){
+  //res.render("dashboard.ejs");
     Campground.find({},function(err,camps){
         if(err)
         console.log(err);
-        else
-        res.render("campgrounds.ejs",{camps:camps,currentUser:req.user});
+        else  {
+          res.render("campgrounds.ejs",{camps:camps,currentUser:req.user});
+          console.log(camps)
+        }
+        
     });
     
+});
+
+app.get("/user",function(req,res){
+  Campground.find({},function(err,camps){
+    if(err)
+   console.log(err);
+    else {
+      res.render("user.ejs",{camps:camps,currentUser:req.user,moment:moment});
+
+    }
+    
+});
 });
 
 app.post('/campgrounds',isLoggedIn , upload.single('image'), (req, res, next) => {
   console.log(req.file);
   var author = {
-      id: req.user.id,
-      username: req.user.username
+      id: req.user._id,
+      enrollment:req.user.enrollment,
+      fullName:req.user.fullName
   };
     var obj = {
-        name: req.body.name,
-        desc: req.body.desc,
+        title: req.body.name,
+        incidentDesc: req.body.indesc,
+        abuserName: req.body.abname,
+        abuserRoll: req.body.abroll,
+        abuserNo: req.body.abno,
+        witnessNo: req.body.wno,
+        location: req.body.loc,
+        status: false,
         img: {
             data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
             contentType: 'image/png'
         },
         author:author
+
     }
     Campground.create(obj, (err, item) => {
         if (err) {
@@ -106,13 +158,19 @@ app.post('/campgrounds',isLoggedIn , upload.single('image'), (req, res, next) =>
         }
         else {
             // item.save();
-            res.redirect('/campgrounds');
+            console.log(item);
+            res.redirect('/dashboard');
         }
     });
+
+
 });
 
 app.get("/campgrounds/new",isLoggedIn ,function(req,res){
     res.render("new.ejs");
+})
+app.get("/aboutus" ,function(req,res){
+  res.render("aboutus.ejs");
 })
 
 app.get("/campgrounds/:id",function(req,res){
@@ -122,7 +180,7 @@ app.get("/campgrounds/:id",function(req,res){
          console.log(err);
      }
          else 
-         res.render("show.ejs",{image:camp});
+         res.render("about.ejs",{image:camp});
      });
     
 });
@@ -141,54 +199,35 @@ app.get("/campgrounds/:id/edit",checkOwner,function(req,res){
     
 });
 
-app.put("/campgrounds/:id", upload.single('image'), checkOwner,(req, res, next) => {
+app.put("/campgrounds/:id",(req, res, next) => {
   
   
- if(req.file){
-  var newobj = {
-    name: req.body.name,
-    desc: req.body.desc,
-    img: {
-        data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-        contentType: 'image/png'
-    }
-     };
-    
-     Campground.findByIdAndUpdate(req.params.id,newobj,function(err,UpdatedCampground){
-       if(err)
-       {
-        req.flash("error", err.message);
-        res.redirect("/campgrounds/" + UpdatedCampground._id);
-       }
-        else
-        res.redirect("/campgrounds/" + UpdatedCampground._id);
 
-     });
-    }
-    else{
       var newobj = {
-        name: req.body.name,
-        desc: req.body.desc
+        status:true
+       
       };
       Campground.findByIdAndUpdate(req.params.id,newobj,function(err,UpdatedCampground){
         if(err)
-         res.redirect("/campgrounds/" + UpdatedCampground._id);
+         res.redirect("/dashboard");
          else
-         res.redirect("/campgrounds/" + UpdatedCampground._id);
+         res.redirect("/dashboard");
  
 
     });
-  }
+  
    
 
 });
 
-app.delete("/campgrounds/:id",checkOwner,function(req,res){
-      Campground.findByIdAndRemove(req.params.id,function(err){
-        if(err)
-        res.redirect("/campgrounds");
+app.delete("/campgrounds/:id",function(req,res){
+      Campground.findOneAndRemove({_id: req.params.id},req.body,function(err){
+        if(err){
+        console.log(err);
+        res.redirect("/dashboard");
+        }
         else
-        res.redirect("/campgrounds");
+        res.redirect("/dashboard");
       });
 });
 
@@ -248,6 +287,7 @@ app.get("/register", function(req, res) {
       var newUser = new User({
         username: req.body.username,
         email: req.body.email,
+        enrollment: req.body.enroll,
         phone: req.body.phone,
         fullName: req.body.fullName
       
@@ -258,7 +298,8 @@ app.get("/register", function(req, res) {
          console.log (err);
         }
         passport.authenticate("local")(req, res, function() {
-          res.redirect("/campgrounds");
+          console.log(user);
+          res.redirect("/dashboard");
         
         });
       });
@@ -267,7 +308,7 @@ app.get("/register", function(req, res) {
 
      app.get("/login", function(req, res) {
         if (req.user) {
-          return res.redirect("/campgrounds");
+          return res.redirect("/dashboard");
         } else {
           res.render("login.ejs");
         }
@@ -276,7 +317,7 @@ app.get("/register", function(req, res) {
       app.post(
         "/login",
         passport.authenticate("local", {
-          successRedirect: "/campgrounds",
+          successRedirect: "/dashboard",
           failureRedirect: "/login",
           failureFlash: true
         }),
@@ -286,7 +327,7 @@ app.get("/register", function(req, res) {
       app.get("/logout", function(req, res) {
         req.logout();
         req.flash("success", "Logged Out");
-        res.redirect("/campgrounds");
+        res.redirect("/dashboard");
       });
 
       function isLoggedIn(req, res, next) {
@@ -322,9 +363,13 @@ app.get("/register", function(req, res) {
       };
 
 
+      const server = http.createServer(app);
+      
+
+
 
 //==========================================================================================================
-
-app.listen(3000,function(){
+app.use("/bower_components", express.static('./bower_components/'));
+server.listen(3000,function(){
     console.log("Running on server 3000");
 });

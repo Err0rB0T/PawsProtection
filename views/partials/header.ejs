@@ -1,44 +1,64 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> Yelp Camp </title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+        content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 4 admin, bootstrap 4, css3 dashboard, bootstrap 4 dashboard, severny admin bootstrap 4 dashboard, frontend, responsive bootstrap 4 admin template, my admin design, my admin dashboard bootstrap 4 dashboard template">
+    <meta name="description"
+        content="My Admin is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="robots" content="noindex,nofollow">
+    <title>PawProtection</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <link rel="stylesheet" href="/stylesheets/body.css">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <!-- Bootstrap Core CSS -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="bower_components/morrisjs/morris.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+   
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     </head>
     <body>
-        <div style ="margin:4%">
-            <nav class="navbar navbar-expand-md navbar-light  fixed-top" style="color:white; background-color: black;">
-                <a class="navbar-brand" href="/" style="color:white;"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-image" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                    <path d="M10.648 7.646a.5.5 0 0 1 .577-.093L15.002 9.5V13h-14v-1l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71z"/>
-                    <path fill-rule="evenodd" d="M4.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
-                </svg> Foodie Land</a>
+        <div>
+            <nav class="navbar navbar-expand-md navbar-light  fixed-top" style="color:white;; background-color: #3a3f51;">
+                <a class="navbar-brand" href="/" style="color:white;">
+                  <img style="width: 15%; height: 15%;" src="https://img.icons8.com/emoji/48/000000/paw-prints.png"/>
+                PawsProtection </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
                 </button>
           
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="/campgrounds" style="color:white;">Gallery</a>
-                </li>
+                  <!-- <li class="nav-item active">
+                    <a class="nav-link" href="/campgrounds" style="color:white;">Dashboard</a>
+                  </li> -->
                 </ul> 
                     <ul class="navbar-nav navbar-right">
                       <% if (currentUser) { %>
                       
                         <li class="nav-item active">
-                          <a class="nav-link" href="#"style="color:white;"><%=currentUser.username%><span class="sr-only">(current)</span></a>
+                          <a class="nav-link" href="/user"style="color:rgba(255,255,255,.4);;"><%=currentUser.username%><span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item active">
-                          <a class="nav-link" href="/logout" style="color:white;">Logout</a>
+                          <a class="nav-link" href="/logout" style="color:rgba(255,255,255,.4);;">Logout</a>
                         </li>
                         <% } else { %>
                       
                     <li class="nav-item active">
-                      <a class="nav-link" href="/login"style="color:white;">Login<span class="sr-only">(current)</span></a>
+                      <a class="nav-link" href="/login"style="color:rgba(255,255,255,.4);;">Login<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
-                      <a class="nav-link" href="/register" style="color:white;">Signup</a>
+                      <a class="nav-link" href="/register" style="color:rgba(255,255,255,.4);;">Signup</a>
                     </li>
                     <%  } %>
                    

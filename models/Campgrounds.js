@@ -1,8 +1,16 @@
   var mongoose = require('mongoose');
 
   var CampSchema= new mongoose.Schema({
-    name: String,
-    desc: String,
+    title: String,
+    incidentDesc: String,
+    abuserName: String,
+    abuserRoll: String,
+    abuserNo: String,
+    witnessNo: String,
+    location: String,
+    
+    createdAt: { type: Date, default: Date.now },
+    status: Boolean,
     img:
     {
         data: Buffer,
@@ -13,7 +21,8 @@
         type: mongoose.Schema.Types.ObjectId,
           ref: "User"
       },
-      username: String
+      enrollment: String,
+      fullName: String
     },
     comments: [
       {
