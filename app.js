@@ -74,7 +74,7 @@ mongoose.connect("mongodb+srv://ErrorB0T:intex2.1@cluster0.vorks.mongodb.net/myF
 
 
 app.get("/",function(req,res){
-    res.render("./views/landing.ejs");
+    res.render("landing.ejs");
 });
 
 
